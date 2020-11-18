@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:us="http://soapspringboot.com/springboot">
+
+    <soapenv:Header/>
+        <soapenv:Body>
+            <us:getUserRequest>
+                <us:name>James</us:name>
+            </us:getUserRequest>
+        </soapenv:Body>
+</soapenv:Envelope>
