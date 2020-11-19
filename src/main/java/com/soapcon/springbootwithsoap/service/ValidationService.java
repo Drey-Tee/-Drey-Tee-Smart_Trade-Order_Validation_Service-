@@ -10,23 +10,24 @@ import java.util.Map;
 
 @Service
 public class ValidationService {
-    private static final Map<String, User> users = new HashMap<>(); // will contain list of users {key:value}
+    private static final Map<Integer, User> users = new HashMap<>(); // will contain list of users {key:value}
 
     @PostConstruct // implicitly call this method when spring boot is started/run/up
     public void initialize(){
 
-        // user 2 data
+        // user data
         User microsoft = new User();
-        microsoft.setNames("Microsoft");
-        microsoft.setUserID(1100);
+        microsoft.setId(1100);
+        microsoft.setTicker("Microsoft");
+        microsoft.setSide("Buy");
         microsoft.setPrice(450.0);
         microsoft.setQuantity(40);
 
-        users.put(microsoft.getNames(), microsoft);
+        users.put(microsoft.getId(), microsoft);
     }
 
 //    get service
-    public static User getUsers(String name) {
-        return users.get(name);
+    public static User getUsers(int id) {
+        return users.get(id);
     }
 }
