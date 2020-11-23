@@ -1,26 +1,31 @@
 package com.soapcon.springbootwithsoap.endpoint;
 
 import com.soapcon.springbootwithsoap.service.ValidationService;
-import com.soapspringboot.springboot.GetUserRequest;
-import com.soapspringboot.springboot.GetUserResponse;
+import com.soapspringboot.springboot.GetOrderRequest;
+import com.soapspringboot.springboot.GetOrderResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+import redis.clients.jedis.Jedis;
 
 @Endpoint
-public class UserEndpoint {
+public class OrderEndpoint {
+//    private GetUserResponse responses;
 
     @Autowired
     public ValidationService validationService; //autowiring the service create (ValidationService)
 
     @PayloadRoot(namespace = "http://soapspringboot.com/springboot",
-    localPart = "getUserRequest") // define namespace to retrieve the user data/ spring web service identifies
+    localPart = "getOrderRequest") // define namespace to retrieve the user data/ spring web service identifies
     @ResponsePayload //convert payload to soap payload type
-    public GetUserResponse getUserRequest(@RequestPayload GetUserRequest request){
-        GetUserResponse response = new GetUserResponse();
-        response.setUser(validationService.getUsers(request.getName())); //from request, get the name
+    public GetOrderResponse getOrderRequest(@RequestPayload GetOrderRequest request) {
+        System.out.println(request.getPrice());
+        Jedis jedis = new Jedis();
+        jedis.publish("CH2", request.getTicker());
+        GetOrderResponse response = new GetOrderResponse();
+        response.setOrder(ValidationService.getUsers(request.getId())); //from request, get the id
         return response;
     }
 }

@@ -27,10 +27,10 @@ class WebServiceConfig extends WsConfigurerAdapter {
 
     @Bean
     public XsdSchema userSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("users.xsd"));
+        return new SimpleXsdSchema(new ClassPathResource("orders.xsd"));
     }
 
-    @Bean(name = "users")
+    @Bean(name = "orders")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema userSchema) {
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
         definition.setSchema(userSchema);
