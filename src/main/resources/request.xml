@@ -1,0 +1,13 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:od="http://soapspringboot.com/springboot">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <od:getOrderRequest>
+            <od:id>1100</od:id>
+            <od:ticker>MSFT</od:ticker>
+            <od:Price>50</od:Price>
+            <od:Quantity>9</od:Quantity>
+            <od:side>buy</od:side>
+        </od:getOrderRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
